@@ -2,7 +2,7 @@ package vindinium;
 
 import javax.swing.text.Position;
 
-public class Hero {
+public class Hero implements IHero {
 	private int mId = -1;
 	private String mName = null;
 	private String mUserId = null;
@@ -14,7 +14,9 @@ public class Hero {
 	private Position mSpawnPosition = null;
 	private boolean mCrashed = false;
 	
-	public Hero(int id) {
+	public Hero() { }
+	
+	public void setId(int id) {
 		mId = id;
 	}
 	

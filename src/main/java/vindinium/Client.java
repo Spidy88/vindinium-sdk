@@ -16,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import vindinium.config.IConfig;
+import vindinium.game.GameResponseParser;
 import vindinium.map.IMap;
 
 public class Client {
@@ -26,6 +27,7 @@ public class Client {
 	private final IConfig mConfig;
 	private final HttpClient mHttpClient;
 	private final String mBaseUrl;
+	private final GameResponseParser mParser = new GameResponseParser();
 	private boolean mGameStarted = false;
 	
 	public Client(IConfig config) {
