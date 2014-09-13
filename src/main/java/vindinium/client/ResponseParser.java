@@ -8,6 +8,8 @@ import vindinium.IHero;
 import vindinium.Position;
 import vindinium.board.Board;
 import vindinium.board.IBoard;
+import vindinium.board.Tile;
+import vindinium.board.TileFactory;
 import vindinium.game.Game;
 
 public class ResponseParser {	
@@ -80,8 +82,20 @@ public class ResponseParser {
 	public IBoard parseBoard(JSONObject boardObject) {
 		Board parsedBoard = new Board();
 		
-		parsedBoard.setSize( boardObject.getInt(JSON.Game.Board.SIZE) );
+		int size = boardObject.getInt(JSON.Game.Board.SIZE);
+		Tile[][] tiles = new Tile[size][size];
+		String tilesStr = boardObject.getString(JSON.Game.Board.TILES);
 		
+		for( int i = 0; i < size; ++i ) {
+			int row = i / size;
+			int col = i % size;
+			
+			String tileStr = tilesStr.substring(i*2, i*2+2);
+			tiles[row][col] = TileFactory.tileFor(tileStr);
+		}
+			
+		parsedBoard.setSize(size);
+		parsedBoard.setTiles(tiles);
 		return parsedBoard;
 	}
 }
