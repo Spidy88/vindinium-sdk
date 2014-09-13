@@ -11,8 +11,9 @@ public class TileFactory {
 	private static final String AIR_SYMBOL = "  ";
 	private static final String WOODS_SYMBOL = "##";
 	private static final String TAVERN_SYMBOL = "[]";
-	private static final String HERO_SYMBOL = "@-";
-	private static final String MINE_SYMBOL = "$-";
+	private static final String HERO_SYMBOL = "@";
+	private static final String MINE_SYMBOL = "$";
+	private static final String MINE_OWNER_NONE = "-";
 	
 	public static Tile tileFor(String tileStr) {
 		if( AIR_SYMBOL.equals(tileStr) ) {
@@ -27,12 +28,17 @@ public class TileFactory {
 			return new TavernTile();
 		} 
 
-		if( HERO_SYMBOL.equals(tileStr) ) {
-			return new HeroTile();
+		if( tileStr.startsWith(HERO_SYMBOL) ) {
+			return new HeroTile(Integer.parseInt(tileStr.substring(1)));
 		} 
 
 		if( MINE_SYMBOL.equals(tileStr) ) {
-			return new MineTile();
+			String mineOwner = tileStr.substring(1);
+			if( MINE_OWNER_NONE.equals(mineOwner) ) {
+				return new MineTile();
+			}
+			
+			return new MineTile(Integer.parseInt(mineOwner));
 		}
 		
 		return new UnknownTile();

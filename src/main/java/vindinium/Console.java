@@ -1,30 +1,43 @@
 package vindinium;
 
+import vindinium.bot.Bot;
+import vindinium.bot.Botzy;
+import vindinium.client.Response;
 import vindinium.config.Config;
-import vindinium.config.InvalidConfigurationException;
 
 public class Console {
-	public static void main(String[] args) throws InvalidConfigurationException {
+	public static void main(String[] args) throws Exception {
 		if ( args.length % 2 != 0 ) {
 			printHelp();
 			return;
 		}
+		
+		Bot bot = new Botzy();
 		
 		// Parse arguments and create configuration
 		Config config = new Config();
 		for( int i = 0; i < args.length; i += 2 ) {
 			parseConfig(config, args[i], args[i+1]);
 		}
+		if( config.getKey() == null ) {
+			config.setKey(bot.getKey());
+		}
 		config.validateConfiguration();
+		System.out.println("Starting game with configuration: ");
+		System.out.println(config.toString());
 		
 		Client client = new Client(config);
+		Response response = client.startGame();
+		while( !response.getGame().isFinished() ) {
+			response = client.sendMove(bot.getAction(response));
+		}
 	}
 	
 	private static void parseConfig(Config config, String option, String value) {
 		if( "-k".equals(option) ) {
 			config.setKey(value);
 		} else if( "-m".equals(option) ) {
-			config.setGameMode(GameMode.valueOf(value));
+			config.setGameMode(GameMode.valueOf(value.toUpperCase()));
 		} else if( "-t".equals(option) ) {
 			try {
 				config.setTurns(Integer.parseInt(value));

@@ -60,4 +60,9 @@ public class Config implements IConfig {
 			throw new InvalidConfigurationException("Turns cannot be less than 1");
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("Key: %1$s\nHost: %2$s\nMode: %3$s\nTurns: %4$s\nMap Id: %5$s", mKey, mBaseUrl, mGameMode, mTurns, mMapId);
+	}
 }

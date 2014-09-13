@@ -59,8 +59,8 @@ public class ResponseParser {
 		
 		parsedHero.setId( heroObject.getInt(JSON.Hero.ID) );
 		parsedHero.setName( heroObject.getString(JSON.Hero.NAME) );
-		parsedHero.setUserId( heroObject.getString(JSON.Hero.USER_ID) );
-		parsedHero.setELO( heroObject.getInt(JSON.Hero.ELO) );
+		parsedHero.setUserId( heroObject.optString(JSON.Hero.USER_ID) );
+		parsedHero.setELO( heroObject.optInt(JSON.Hero.ELO, 0) );
 		parsedHero.setLife( heroObject.getInt(JSON.Hero.LIFE) );
 		parsedHero.setGold( heroObject.getInt(JSON.Hero.GOLD) );
 		parsedHero.setMineCount( heroObject.getInt(JSON.Hero.MINE_COUNT) );
