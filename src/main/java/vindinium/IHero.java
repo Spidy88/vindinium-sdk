@@ -1,7 +1,5 @@
 package vindinium;
 
-import javax.swing.text.Position;
-
 public interface IHero {
 	public int getId();
 	public String getName();

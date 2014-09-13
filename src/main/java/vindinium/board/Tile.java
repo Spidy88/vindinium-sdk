@@ -1,4 +1,4 @@
-package vindinium.map;
+package vindinium.board;
 
 public class Tile {
 	public static final String AIR_SYMBOL = "  ";

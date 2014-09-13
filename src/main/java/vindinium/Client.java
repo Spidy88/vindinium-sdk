@@ -15,9 +15,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import vindinium.board.IBoard;
+import vindinium.client.ResponseParser;
 import vindinium.config.IConfig;
-import vindinium.game.GameResponseParser;
-import vindinium.map.IMap;
 
 public class Client {
 	private static final String KEY_KEY = "key";
@@ -27,7 +27,7 @@ public class Client {
 	private final IConfig mConfig;
 	private final HttpClient mHttpClient;
 	private final String mBaseUrl;
-	private final GameResponseParser mParser = new GameResponseParser();
+	private final ResponseParser mParser = new ResponseParser();
 	private boolean mGameStarted = false;
 	
 	public Client(IConfig config) {
@@ -36,7 +36,7 @@ public class Client {
 		mBaseUrl = String.format("%1$s/%2$s", mConfig.getBaseUrl(), mConfig.getGameMode().toString());
 	}
 	
-	public IMap startGame() throws GameStateException, IOException {
+	public IBoard startGame() throws GameStateException, IOException {
 		if( mGameStarted ) {
 			throw new GameStateException("Game already in progress");
 		}
@@ -57,7 +57,7 @@ public class Client {
 		}
 	}
 	
-	public IMap sendMove(Action action) throws CrashedException, GameStateException, IOException {
+	public IBoard sendMove(Action action) throws CrashedException, GameStateException, IOException {
 		if( !mGameStarted ) {
 			throw new GameStateException("Game has not started yet");
 		}

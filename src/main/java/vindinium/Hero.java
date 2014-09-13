@@ -1,7 +1,5 @@
 package vindinium;
 
-import javax.swing.text.Position;
-
 public class Hero implements IHero {
 	private int mId = -1;
 	private String mName = null;

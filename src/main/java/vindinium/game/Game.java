@@ -1,25 +1,25 @@
 package vindinium.game;
 
 import vindinium.IHero;
-import vindinium.map.IMap;
+import vindinium.board.IBoard;
 
 public class Game implements IGame {
 	private String mId = null;
 	private int mTurn = -1;
 	private int mMaxTurns = -1;
 	private IHero[] mHeroes = null;
-	private IMap mMap = null;
-	private boolean mIsFinished = false;
+	private IBoard mBoard = null;
+	private boolean mFinished = false;
 	
 	public Game() { }
 	
-	public Game(String id, int turn, int maxTurns, IHero[] heroes, IMap map, boolean isFinished) {
+	public Game(String id, int turn, int maxTurns, IHero[] heroes, IBoard board, boolean finished) {
 		setId(id);
 		setTurn(turn);
 		setMaxTurns(maxTurns);
 		setHeroes(heroes);
-		setMap(map);
-		setIsFinished(isFinished);
+		setBoard(board);
+		setFinished(finished);
 	}
 
 	public String getId() {
@@ -54,20 +54,20 @@ public class Game implements IGame {
 		this.mHeroes = heroes;
 	}
 
-	public IMap getMap() {
-		return mMap;
+	public IBoard getBoard() {
+		return mBoard;
 	}
 
-	public void setMap(IMap map) {
-		this.mMap = map;
+	public void setBoard(IBoard board) {
+		this.mBoard = board;
 	}
 
 	public boolean isFinished() {
-		return mIsFinished;
+		return mFinished;
 	}
 
-	public void setIsFinished(boolean isFinished) {
-		this.mIsFinished = isFinished;
+	public void setFinished(boolean finished) {
+		this.mFinished = finished;
 	}
 
 
