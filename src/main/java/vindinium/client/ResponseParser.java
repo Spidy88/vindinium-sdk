@@ -12,7 +12,20 @@ import vindinium.board.Tile;
 import vindinium.board.TileFactory;
 import vindinium.game.Game;
 
-public class ResponseParser {	
+/**
+ * A parser for deserializing a JSON response from a Vindinium server and turning
+ * it into a Response POJO.
+ * 
+ * @author Nick Ferraro
+ *
+ */
+public class ResponseParser {
+	/**
+	 * Parses a JSONObject into a Java Response POJO.
+	 * 
+	 * @param response A JSONObject in the response data schema expected from a Vindinium server
+	 * @return A Response object POJO representing the json object
+	 */
 	public Response parseResponseJson(JSONObject response) {
 		Game parsedGame = new Game();
 		IHero parsedHero = null;
@@ -54,6 +67,12 @@ public class ResponseParser {
 		return new Response(token, viewUrl, playUrl, parsedGame, parsedHero);
 	}
 	
+	/**
+	 * Parse a Hero JSONObject into a Java Hero POJO.
+	 * 
+	 * @param heroObject A JSONObject in the hero data schema expected from a Vindinium server
+	 * @return A IHero object POJO representing the json object
+	 */
 	public IHero parseHero(JSONObject heroObject) {
 		Hero parsedHero = new Hero();
 		
@@ -79,6 +98,12 @@ public class ResponseParser {
 		return parsedHero;
 	}
 	
+	/**
+	 * Parse a Board JSONObject into a Java Board POJO.
+	 * 
+	 * @param boardObject A JSONObject in the board data schema expected from a Vindinium server
+	 * @return A IBoard object POJO representing the json object
+	 */
 	public IBoard parseBoard(JSONObject boardObject) {
 		Board parsedBoard = new Board();
 		

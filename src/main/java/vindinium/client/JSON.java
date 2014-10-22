@@ -1,5 +1,11 @@
 package vindinium.client;
 
+/**
+ * A JSON class to hold keys expected from a Vindinium JSON response
+ * 
+ * @author Nick Ferraro
+ *
+ */
 public final class JSON {
 	public static final String GAME = "game";
 	public static final String HERO = "hero";

@@ -2,7 +2,6 @@ package vindinium;
 
 import vindinium.bot.Bot;
 import vindinium.bot.Botzy;
-import vindinium.client.Response;
 import vindinium.config.Config;
 
 public class Console {
@@ -26,11 +25,8 @@ public class Console {
 		System.out.println("Starting game with configuration: ");
 		System.out.println(config.toString());
 		
-		Client client = new Client(config);
-		Response response = client.startGame();
-		while( !response.getGame().isFinished() ) {
-			response = client.sendMove(bot.getAction(response));
-		}
+		Vindinium vindinium = new Vindinium(config);
+		vindinium.playGame(bot);
 	}
 	
 	private static void parseConfig(Config config, String option, String value) {
