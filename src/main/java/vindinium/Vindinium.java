@@ -2,12 +2,15 @@ package vindinium;
 
 import java.io.IOException;
 
-import vindinium.bot.Bot;
+import vindinium.bot.IBot;
 import vindinium.client.Client;
-import vindinium.client.Response;
-import vindinium.config.IConfig;
+import vindinium.client.IConfig;
+import vindinium.client.api.Response;
+import vindinium.exception.CrashedException;
+import vindinium.exception.GameStateException;
+import vindinium.game.Action;
 import vindinium.logger.ILogger;
-import vindinium.logger.NullLogger;
+import vindinium.logger.core.NullLogger;
 
 /**
  * Play a game of Vindinium! All you need is a config and bot to start slaying.
@@ -61,7 +64,7 @@ public class Vindinium {
 	 * @throws IOException Thrown if the server cannot be reached
 	 * @throws CrashedException Thrown if the bot takes too long to move and crashes
 	 */
-	public void playGame(Bot bot) throws GameStateException, IOException, CrashedException {
+	public void playGame(IBot bot) throws GameStateException, IOException, CrashedException {
 		// Start a new game
 		Response response = mClient.startGame();
 		

@@ -1,7 +1,5 @@
 package vindinium.game;
 
-import vindinium.IHero;
-import vindinium.board.IBoard;
 
 /**
  * An interface for a Vindinium Game

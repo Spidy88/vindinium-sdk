@@ -14,10 +14,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import vindinium.Action;
-import vindinium.CrashedException;
-import vindinium.GameStateException;
-import vindinium.config.IConfig;
+import vindinium.client.api.Response;
+import vindinium.client.api.ResponseParser;
+import vindinium.exception.CrashedException;
+import vindinium.exception.GameStateException;
+import vindinium.game.Action;
 
 /**
  * A client for connection to and interacting with a Vindinium server and game.
