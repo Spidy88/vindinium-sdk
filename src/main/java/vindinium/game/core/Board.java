@@ -1,6 +1,9 @@
 package vindinium.game.core;
 
+import java.util.HashMap;
+
 import vindinium.game.IBoard;
+import vindinium.game.Tile;
 
 /**
  * A simple implementation of a Vindinium board to help
@@ -10,8 +13,24 @@ import vindinium.game.IBoard;
  *
  */
 public class Board implements IBoard {
+	private static final HashMap<String, Tile> TILE_MAP = new HashMap<String, Tile>();
 	private int mSize = 1;
 	private String mTiles = null;
+	
+	static {
+		TILE_MAP.put("  ", Tile.AIR);
+		TILE_MAP.put("##", Tile.WOODS);
+		TILE_MAP.put("[]", Tile.TAVERN);
+		TILE_MAP.put("@1", Tile.HERO1);
+		TILE_MAP.put("@2", Tile.HERO2);
+		TILE_MAP.put("@3", Tile.HERO3);
+		TILE_MAP.put("@4", Tile.HERO4);
+		TILE_MAP.put("$-", Tile.MINE_FREE);
+		TILE_MAP.put("$1", Tile.MINE_HERO1);
+		TILE_MAP.put("$2", Tile.MINE_HERO2);
+		TILE_MAP.put("$3", Tile.MINE_HERO3);
+		TILE_MAP.put("$4", Tile.MINE_HERO4);
+	}
 
 	public Board() { }
 	
@@ -55,5 +74,28 @@ public class Board implements IBoard {
 		}
 		
 		mTiles = tiles;
+	}
+	
+	public Tile getTile(int x, int y) {
+		// Validate the x and y parameter
+		if( x < 0 || y < 0 || x >= mSize || y >= mSize ) {
+			throw new IllegalArgumentException("Cannot get Tile for an out of bounds (x, y) position");
+		}
+		
+		int start = x + (y * mSize);
+		String tile = mTiles.substring(start, start + 2);
+		
+		return getTile(tile);
+	}
+	
+	protected Tile getTile(String tileString) {
+		Tile tile = TILE_MAP.get(tileString);
+		
+		// If a tile isn't returned, we don't know what the heck the string is
+		if( tile == null ) {
+			throw new IllegalArgumentException(String.format("Unkown tile: %s", tileString));
+		}
+		
+		return tile;
 	}
 }

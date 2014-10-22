@@ -20,4 +20,14 @@ public interface IBoard {
 	 * @return The board's tiles as a string
 	 */
 	public String getTiles();
+	
+	/**
+	 * Get the tile at a specific point on the board
+	 * 
+	 * @param x The x position of the tile
+	 * @param y The y position of the tile
+	 * @return The type of tile at the specified position
+	 * @throws IllegalArgumentException Thrown if the x or y parameter are out of bounds
+	 */
+	public Tile getTile(int x, int y);
 }
